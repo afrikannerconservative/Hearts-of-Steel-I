@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Country Simulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+        }
+      }
+    </script>
+</head>
+<body>
+    <!-- Background Music (Hidden) -->
+    <audio id="background-music" loop autoplay style="display: none;">
+        <source src="hearts-of-iron-iv-main-theme-made-with-Voicemod.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="main-container">
+    <div id="setup-screen">
+        <div class="setup-overlay">
+            <img src="game_logo.png" alt="Country Simulator" class="game-logo">
+            <h1>Country Simulator</h1>
+            <p class="setup-flavor-text">Forge your nation's destiny. Build an empire, develop your economy, wage war, or establish peace. The choices are yours, and history awaits.</p>
+            <form id="setup-form">
+                <label for="country-name">Country Name:</label>
+                <input type="text" id="country-name" name="country-name" required placeholder="Enter your nation's name..."><br><br>
+
+                <label for="leader-name">Leader Name:</label>
+                <input type="text" id="leader-name" name="leader-name" required placeholder="Enter your leader's name..."><br><br>
+
+                <label for="leader-age">Leader's Starting Age:</label>
+                <input type="number" id="leader-age" name="leader-age" value="45" min="25" max="80" required><br><br>
+
+                <label for="start-year">Start Year:</label>
+                <input type="number" id="start-year" name="start-year" value="2024" required><br><br>
+
+                <label for="gov-type">Government Type:</label>
+                <select id="gov-type" name="gov-type" required>
+                    <option value="Democracy">Democracy</option>
+                    <option value="Republic">Republic</option>
+                    <option value="Monarchy">Monarchy (Absolute)</option>
+                    <option value="Constitutional Monarchy">Constitutional Monarchy</option>
+                    <option value="Parliamentary Republic">Parliamentary Republic</option>
+                    <option value="Theocracy">Theocracy</option>
+                    <option value="Dictatorship">Dictatorship</option>
+                    <option value="Oligarchy">Oligarchy</option>
+                    <option value="Anarchy">Anarchy</option>
+                    <option value="Federal Republic">Federal Republic</option>
+                    <option value="Presidential Republic">Presidential Republic</option>
+                    <option value="Semi-Presidential Republic">Semi-Presidential Republic</option>
+                    <option value="Elective Monarchy">Elective Monarchy</option>
+                    <option value="Technocracy">Technocracy</option>
+                    <option value="Meritocracy">Meritocracy</option>
+                    <option value="Tribal Council">Tribal Council</option>
+                    <option value="City-State">City-State</option>
+                    <option value="Empire">Empire</option>
+                    <option value="Confederation">Confederation</option>
+                    <option value="Military Junta">Military Junta</option>
+                    <option value="Stratocracy">Stratocracy (Military Government)</option>
+                    <option value="Communist State">Communist State (One-Party)</option>
+                    <option value="Feudal State">Feudal State</option>
+                    <option value="Corporatocracy">Corporatocracy</option>
+                    <option value="Magocracy">Magocracy (Rule by Mages)</option>
+                    <option value="Theocratic Republic">Theocratic Republic</option>
+                    <option value="Socialist Republic">Socialist Republic</option>
+                    <option value="National-Socialist State">National-Socialist State</option>
+                    <option value="Corporate State">Corporate State</option>
+                    <option value="People's Republic">People's Republic</option>
+                    <option value="Workers' Council">Workers' Council</option>
+                    <option value="Autonomous Region">Autonomous Region</option>
+                    <option value="City-County Federation">City-County Federation</option>
+                    <option value="Christian Knights Order">Christian Knights Order</option>
+                    <option value="Muslim Military Order">Muslim Military Order</option>
+                    <option value="Vassal State">Vassal State</option>
+                    <option value="Political Party">Political Party</option>
+                    <option value="Terrorist Organization">Terrorist Organization</option>
+                    <option value="Resistance Group">Resistance Group</option>
+                    <option value="Rebel Group">Rebel Group</option>
+                </select><br><br>
+
+                <label for="dominant-ideology">Dominant Ideology:</label>
+                <select id="dominant-ideology" name="dominant-ideology" required>
+                    <option value="Communism">Communism</option>
+                    <option value="Socialism">Socialism</option>
+                    <option value="Nationalism">Nationalism</option>
+                    <option value="National-Socialism">National-Socialism</option>
+                    <option value="National-Conservatism">National-Conservatism</option>
+                    <option value="Eco-Nationalism">Eco-Nationalism</option>
+                    <option value="Market Socialism">Market Socialism</option>
+                    <option value="Religious Nationalism">Religious Nationalism</option>
+                    <option value="Authoritarian Nationalism">Authoritarian Nationalism</option>
+                    <option value="Liberalism">Liberalism</option>
+                    <option value="Conservatism">Conservatism</option>
+                    <option value="Fascism">Fascism</option>
+                    <option value="Environmentalism">Environmentalism</option>
+                    <option value="Libertarianism">Libertarianism</option>
+                    <option value="Pacifism">Pacifism</option>
+                    <option value="Globalism">Globalism</option>
+                    <option value="Tribalism">Tribalism</option>
+                    <option value="Futurism">Futurism</option>
+                    <option value="Traditionalism">Traditionalism</option>
+                    <option value="Authoritarian Capitalism">Authoritarian Capitalism</option>
+                    <option value="Democratic Socialism">Democratic Socialism</option>
+                    <option value="Progressivism">Progressivism</option>
+                    <option value="Agrarianism">Agrarianism</option>
+                    <option value="Primitivism">Primitivism</option>
+                    <option value="Techno-Utopianism">Techno-Utopianism</option>
+                    <option value="Post-Humanism">Post-Humanism</option>
+                    <option value="Neo-Feudalism">Neo-Feudalism</option>
+                    <option value="Solarpunk">Solarpunk</option>
+                    <option value="Cybercratic Union">Cybercratic Union</option>
+                    <option value="Monarchism">Monarchism</option>
+                    <option value="Imperialism">Imperialism</option>
+                    <option value="Isolationism">Isolationism</option>
+                    <option value="Corporatism">Corporatism</option>
+                    <option value="Syndicalism">Syndicalism</option>
+                    <option value="Anarcho-Capitalism">Anarcho-Capitalism</option>
+                    <option value="Anarcho-Communism">Anarcho-Communism</option>
+                    <option value="Centrism">Centrism</option>
+                    <option value="Paganism">Paganism</option>
+                    <option value="Christianity">Christianity</option>
+                    <option value="Islam">Islam</option>
+                    <option value="Judaism">Judaism</option>
+                    <option value="Hinduism">Hinduism</option>
+                    <option value="Buddhism">Buddhism</option>
+                    <option value="Roman Polytheism">Roman Polytheism</option>
+                    <option value="Greek Philosophy">Greek Philosophy</option>
+                    <option value="Stoicism">Stoicism</option>
+                    <option value="Epicureanism">Epicureanism</option>
+                    <option value="Esotericism">Esotericism</option>
+                </select><br><br>
+
+                <label for="leader-style">Leadership Style:</label>
+                 <select id="leader-style" name="leader-style" required>
+                    <option value="Benevolent">Benevolent</option>
+                    <option value="Pragmatic">Pragmatic</option>
+                    <option value="Authoritarian">Authoritarian</option>
+                    <option value="Charismatic">Charismatic</option>
+                    <option value="Expansionist">Expansionist</option>
+                    <option value="Isolationist">Isolationist</option>
+                    <option value="Populist">Populist</option>
+                     <option value="Cautious">Cautious</option>
+                     <option value="Idealistic">Idealistic</option>
+                     <option value="Corrupt">Corrupt</option>
+                     <option value="Strategic">Strategic</option>
+                     <option value="Unpredictable">Unpredictable</option>
+                     <option value="Reformer">Reformer</option>
+                     <option value="Reactionary">Reactionary</option>
+                     <option value="Military-Focused">Military-Focused</option>
+                     <option value="Diplomacy-Focused">Diplomacy-Focused</option>
+                     <option value="Diplomat">Diplomat</option>
+                     <option value="Economist">Economist</option>
+                     <option value="Innovator">Innovator</option>
+                     <option value="Zealot">Zealot</option>
+                     <option value="Bureaucrat">Bureaucrat</option>
+                     <option value="Philosopher King">Philosopher King</option>
+                     <option value="Reluctant Leader">Reluctant Leader</option>
+                     <option value="Ruthless Pragmatist">Ruthless Pragmatist</option>
+                     <option value="Master Propagandist">Master Propagandist</option>
+                     <option value="People's Champion">People's Champion</option>
+                     <option value="Shadowy Puppeteer">Shadowy Puppeteer</option>
+                     <option value="The Strategist">The Strategist</option>
+                     <option value="The People's Tribune">The People's Tribune</option>
+                     <option value="The Visionary Architect">The Visionary Architect</option>
+                     <option value="The Silent Guardian">The Silent Guardian</option>
+                     <option value="The Reluctant Hero">The Reluctant Hero</option>
+                </select><br><br>
+
+                <div>
+                    <input type="checkbox" id="historical-events" name="historical-events" checked>
+                    <label for="historical-events" style="display: inline; font-weight: normal;">Enable Historical Flavor Events</label>
+                </div><br>
+
+                <button type="submit">Start New Simulation</button>
+                <button type="button" id="load-game-button" style="margin-left: 10px;">Load Saved Game</button>
+            </form>
+             <div id="loading-indicator" style="display: none;">Generating your world...</div>
+        </div>
+    </div>
+
+    <div id="game-screen" style="display: none;">
+        <div id="top-bar">
+            <div id="game-header">
+                <img id="player-flag" src="placeholder_flag.png" alt="Player Flag" style="display: none;">
+                <h1 id="game-title" style="display: inline-block;"></h1>
+            </div>
+            <div id="game-info">
+                 <p id="game-subtitle"></p>
+            </div>
+            <div id="header-actions">
+                <button id="save-game-button">Save Game</button>
+            </div>
+        </div>
+
+        <div id="disease-warning" class="warning-banner" style="display: none;">
+            Warning: Diseases are active in your nation!
+        </div>
+
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="Diplomacy">Diplomacy</button>
+            <button class="tab-button" data-tab="Communications">Communications</button>
+            <button class="tab-button" data-tab="Economy">Economy</button>
+            <button class="tab-button" data-tab="Military">Military</button>
+            <button class="tab-button" data-tab="Internal">Internal Affairs</button>
+            <button class="tab-button" data-tab="Culture">Culture</button>
+            <button class="tab-button" data-tab="Government">Government</button>
+             <button class="tab-button" data-tab="Religion">Religion</button>
+            <button class="tab-button" data-tab="SecretAgency">Secret Agency</button>
+            <button class="tab-button" data-tab="Maps">Maps</button>
+            <button class="tab-button" data-tab="International">International</button>
+             <button class="tab-button" data-tab="Trade">Trade</button> 
+             <button class="tab-button" data-tab="Immigration">Immigration</button> 
+             <button class="tab-button" data-tab="Research">Research</button> 
+             <button class="tab-button" data-tab="History">History</button>
+            <button class="tab-button" data-tab="Credits">Credits</button> 
+            <button class="tab-button" data-tab="Organizations">Organizations</button> 
+            <button class="tab-button" data-tab="Factions">Factions</button> 
+        </div>
+
+        <div id="action-feedback" class="feedback"></div>
+        <div id="global-events-feed" class="feedback" style="border-left: 4px solid #007bff; margin-top:10px; display:none;"></div>
+        <div id="local-news-feed" class="feedback" style="border-left: 4px solid #f0932b; margin-top:10px; display:none;"></div>
+
+        <div id="Diplomacy" class="tab-content active">
+            <h2>Diplomacy Overview</h2>
+            <div id="diplomacy-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="diplomacy-stats"></ul>
+             <h3>Neighbouring Countries (Click for details)</h3>
+            <ul id="diplomacy-neighbors"></ul>
+            <div id="diplomacy-puppets-section" style="margin-top: 20px; display: none;">
+                <h3>Puppet States</h3>
+                <ul id="diplomacy-puppets-list"></ul>
+            </div>
+             <div class="action-area">
+                 <label for="diplomacy-action">Take Diplomatic Action:</label>
+                 <input type="text" id="diplomacy-action" placeholder="e.g., Sign trade deal with X, Declare war on Y, Annex Z, Puppet Z, Attempt assassination of X's leader, Instigate coup in X, Offer aid to X, Sanction Y, Buy region [RegionName] from [Nation]">
+                 <button class="action-button" data-tab="Diplomacy">Submit Action</button>
+             </div>
+        </div>
+        
+        <div id="Communications" class="tab-content">
+            <h2>Communications Hub</h2>
+            <div id="communications-situation">
+                <p>Send direct messages to other world leaders. Your words will be remembered and will shape your relationships.</p>
+            </div>
+            <h3>Known Leaders</h3>
+            <ul id="communications-leaders-list">
+                <li>Loading leaders...</li>
+            </ul>
+        </div>
+
+        <div id="Economy" class="tab-content">
+            <h2>Economy Overview</h2>
+            <div id="economy-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="economy-stats"></ul>
+             <h3>Neighbouring Countries (Click for details)</h3>
+            <ul id="economy-neighbors"></ul>
+            <div id="economy-puppets-section" style="margin-top: 20px; display: none;">
+                <h3>Puppet States</h3>
+                <ul id="economy-puppets-list"></ul>
+            </div>
+             <div class="action-area">
+                 <label for="economy-action">Take Economic Action:</label>
+                 <input type="text" id="economy-action" placeholder="e.g., Invest in infrastructure, Adjust taxes, Fund nuclear program, Increase military spending, Start trade war with X">
+                 <button class="action-button" data-tab="Economy">Submit Action</button>
+             </div>
+        </div>
+
+        <div id="Military" class="tab-content">
+            <h2>Military Overview</h2>
+             <div id="military-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="military-stats"></ul>
+            <h3>Military Inventory</h3> 
+            <div id="military-inventory"></div> 
+            <div id="ongoing-wars-section" style="margin-top: 20px; display: none;">
+                 <h3>Ongoing Wars</h3>
+                 <ul id="ongoing-wars-list"></ul>
+            </div>
+             <div class="action-area">
+                 <label for="military-action">Take Military Action:</label>
+                 <input type="text" id="military-action" placeholder="e.g., Increase army training, Invade X, Develop Missiles/Nukes, Use airforce against X, Send supplies to forces fighting Y, Change strategy in war against Z, Adopt guerrilla tactics">
+                 <button class="action-button" data-tab="Military">Submit Action</button>
+             </div>
+        </div>
+
+        <div id="Internal" class="tab-content">
+            <h2>Internal Affairs Overview</h2>
+            <div id="internal-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="internal-stats"></ul>
+            <div id="local-news-section">
+                <h3>Local News</h3>
+                <div id="local-news-content">
+                    <p>No local news to report.</p>
+                </div>
+            </div>
+            <div class="action-area">
+                <label for="internal-action">Take Internal Action/Event:</label>
+                <input type="text" id="internal-action" placeholder="e.g., Launch propaganda campaign, Address protests, Improve leader security, Suppress minority group X, Fund national police, Implement reform Y">
+                <button class="action-button" data-tab="Internal">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="Culture" class="tab-content">
+            <h2>Cultural Situation</h2>
+            <div id="culture-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="culture-stats"></ul>
+             <h3>Ethnic Groups (Your Nation)</h3>
+            <div id="culture-ethnic-groups">
+                <p>Ethnic composition data not yet available.</p>
+            </div>
+             <h3>Neighboring Ethnic Groups Overview</h3>
+             <div id="culture-neighbor-ethnicities-overview">
+                <p>Ethnic group information for neighbors may be limited without specific intel or interactions.</p>
+                 <ul id="culture-neighbor-ethnicities-list"></ul>
+             </div>
+             <h3>Languages Spoken</h3>
+             <ul id="culture-languages">
+                 <p>Language data not yet available.</p>
+             </ul>
+            <div class="action-area">
+                <label for="culture-action">Take Cultural Action:</label>
+                <input type="text" id="culture-action" placeholder="e.g., Fund national arts program, Promote traditional values, Suppress minority group X, Encourage immigration from Y, Foster ethnic integration">
+                <button class="action-button" data-tab="Culture">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="Government" class="tab-content">
+            <h2>Government Overview</h2>
+            <div id="government-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="government-stats"></ul>
+             <h3>Government Structure</h3>
+             <div id="government-structure-info">
+                 <p>Type: <span id="gov-type-display">N/A</span></p>
+                 <p id="prime-minister-display" style="display: none;">Prime Minister: <span id="pm-name">N/A</span></p>
+                  <p>Next Election Due: <span id="next-election-year">N/A</span></p>
+             </div>
+            <h3>Ministers (Cabinet)</h3>
+            <div id="ministers-list"></div>
+            <h3>Political Parties</h3>
+            <div id="political-parties-list"></div>
+            <div class="action-area">
+                <label for="government-action">Take Government Action:</label>
+                <input type="text" id="government-action" placeholder="e.g., Change gov type, Hold elections, Hire/Fire Minister..., Create party [Name] ideology [Ideology] leader [LName] style [LStyle] goals '[Desc]' (optional: extremist), Pass law X, Form a new department, Elect new PM (if applicable)">
+                <button class="action-button" data-tab="Government">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="Religion" class="tab-content">
+            <h2>Religion Overview</h2>
+            <div id="religion-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="religion-stats"></ul>
+            <h3>Religious Demographics</h3>
+            <div id="religion-demographics">
+                 <p>Religious demographic data not yet available.</p>
+            </div>
+            <div class="action-area">
+                <label for="religion-action">Take Religious Action:</label>
+                <input type="text" id="religion-action" placeholder="e.g., Promote state religion, Suppress minority faith X, Fund missionaries, Declare religion Y illegal, Attempt to unify denominations, Assimilation campaign in region Z for religion A, Create new religion: [Name], Beliefs: '[List beliefs]' (optional: charismatic leader '[LeaderName]')">
+                <button class="action-button" data-tab="Religion">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="SecretAgency" class="tab-content">
+            <h2>Secret Agency Overview</h2>
+            <div id="secretagency-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="secretagency-stats"></ul>
+             <h3>Known Plots & Intel</h3>
+            <div id="secretagency-intel-reports"></div>
+             <h3>Neighbor Intelligence Reports (Summary)</h3>
+             <div id="secretagency-neighbor-intel-summary">
+                 <ul id="secretagency-neighbor-intel-list"></ul>
+             </div>
+            <div class="action-area">
+                <label for="secretagency-action">Take Intelligence Action:</label>
+                <input type="text" id="secretagency-action" placeholder="e.g., Hire spy for X, Gather intel on Y, Improve counter-intelligence, Attempt assassination of Z's leader, Spread disinformation in X, Conduct cyber attack on Y">
+                <button class="action-button" data-tab="SecretAgency">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="Maps" class="tab-content">
+            <h2>National & World Overview</h2>
+            <div id="maps-situation">
+                <p>Your nation, <strong id="map-country-name"></strong>, currently controls the following territories:</p>
+                <ul id="map-territories-list">
+                    <p>List of controlled territories.</p>
+                </ul>
+                <p style="margin-top: 15px;">Current known land/sea borders:</p>
+                <ul id="map-border-list">
+                    <li>Loading border information...</li>
+                </ul>
+            </div>
+            <h3>World Map</h3>
+            <div id="world-map-container">
+                <img id="world-map-image" src="placeholder_map.png" alt="World Map" style="max-width: 100%; height: auto; display: none; border: 1px solid #665c47;">
+                <p id="world-map-placeholder">World map visualization is being generated or is under development.</p>
+            </div>
+            <div id="regions-section">
+                <h3>Regions & States</h3>
+                <p id="regions-explanation">These are the administrative regions of your nation. Each region can develop specialized facilities based on local geography and resources.</p>
+                <div id="regions-container">
+                    <ul id="regions-list">
+                        <li>Loading regions...</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="action-area">
+                <label for="maps-action">Take Map/Territorial Action:</label>
+                <input type="text" id="maps-action" placeholder="e.g., Explore unclaimed territory, Attempt to colonize [Region Name], Fortify border with X, Build [facility type] in [region name]">
+                <button class="action-button" data-tab="Maps">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="International" class="tab-content">
+            <h2>International Landscape</h2>
+            <p>Overview of known nations in the world.</p>
+            <div id="international-situation"></div>
+            <h3>Known Nations (Click for more details - if available)</h3>
+            <ul id="international-nations"></ul>
+            <h3>Global Conflicts & Treaties</h3>
+            <div id="international-conflicts-treaties">
+                <p>No known global conflicts or treaties.</p>
+            </div>
+            <div class="action-area">
+                <label for="international-action">Take International Action:</label>
+                <input type="text" id="international-action" placeholder="e.g., Request UN intervention, Propose global treaty, Offer aid to X, Sanction Y, Form alliance with Z, Leave treaty A">
+                <button class="action-button" data-tab="International">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="Trade" class="tab-content">
+            <h2>Trade Overview</h2>
+            <div id="trade-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="trade-stats"></ul>
+            <h3>Available Resources & Market Prices</h3>
+            <div id="trade-resources-list"></div>
+            <h3>Trade Partners</h3>
+            <ul id="trade-partners-list"></ul>
+            <div class="action-area">
+                <label for="trade-action">Take Trade Action:</label>
+                <input type="text" id="trade-action" placeholder="e.g., Buy 1000 units of Oil from X, Sell 500 units of Food to Y, Negotiate trade deal with Z, Impose tariffs on imports from W">
+                <button class="action-button" data-tab="Trade">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="Immigration" class="tab-content">
+            <h2>Immigration Overview</h2>
+            <div id="immigration-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="immigration-stats"></ul>
+            <div class="action-area">
+                <label for="immigration-action">Take Immigration Action:</label>
+                <input type="text" id="immigration-action" placeholder="e.g., Adjust legal immigration policy, Increase border security funding, Offer amnesty to illegal immigrants, Close borders temporarily, Accept refugee group X">
+                <button class="action-button" data-tab="Immigration">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="Research" class="tab-content">
+            <h2>Research & Development</h2>
+            <div id="research-situation"></div>
+            <h3>Key Stats</h3>
+            <ul id="research-stats"></ul>
+            <h3>Ongoing Research Projects</h3>
+            <div id="research-ongoing-projects">
+                <p>No research projects currently underway.</p>
+            </div>
+            <h3>Known Diseases & Health Status</h3>
+            <div id="research-diseases-status">
+                <p>No known disease outbreaks.</p>
+            </div>
+            <div class="action-area">
+                <label for="research-action">Take Research Action:</label>
+                <input type="text" id="research-action" placeholder="e.g., Increase research funding, Focus research on medical tech, Initiate research on [Specific Topic, e.g., Unknown Disease X], Develop cure for [Disease Name], Research new military technology">
+                <button class="action-button" data-tab="Research">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="History" class="tab-content">
+            <h2>National History & Origin</h2>
+            <div id="history-content">
+                <p>History data not available.</p>
+            </div>
+        </div>
+
+        <div id="Credits" class="tab-content">
+            <h2>Credits</h2>
+            <p>Original Creator: <strong>majesticgrove1480193</strong></p>
+            <h3>Contributors:</h3>
+            <ul>
+                <li>Aviationfanithink</li>
+                <li>xXJimmy69Xx</li>
+                <li>danny_donkey_639950</li>
+                <li>magnifymagnify</li>
+            </ul>
+            <p>Thank you to all contributors on Websim!</p>
+        </div>
+
+        <div id="Organizations" class="tab-content">
+            <h2>Global Organizations</h2>
+            <div id="organizations-situation">
+                <p>Overview of major global organizations.</p>
+            </div>
+            <h3>Known Organizations</h3>
+            <ul id="organizations-list">
+                <li>Loading organizations...</li>
+            </ul>
+            <div class="action-area">
+                <label for="organizations-action">Take Organization Action:</label>
+                <input type="text" id="organizations-action" placeholder="e.g., Join [Organization Name], Propose resolution in [Organization Name], Fund [Organization Name]">
+                <button class="action-button" data-tab="Organizations">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="Factions" class="tab-content">
+            <h2>Factions & Alliances</h2>
+            <div id="factions-situation">
+                <p>Overview of major global factions and your involvement.</p>
+            </div>
+            <h3>Your Faction</h3>
+            <div id="player-faction-info">
+                <p>You are not currently a member or leader of a faction.</p>
+            </div>
+            <h3>Known Global Factions</h3>
+            <ul id="global-factions-list">
+                <li>Loading factions...</li>
+            </ul>
+            <div class="action-area">
+                <label for="factions-action">Take Faction Action:</label>
+                <input type="text" id="factions-action" placeholder="e.g., Create Faction: [Name] Type: [Trade/Defense/Coalition] Members: [Nation1, Nation2], Invite [Nation] to [Faction Name], Leave [Faction Name], Propose faction goal '[New Goal]'">
+                <button class="action-button" data-tab="Factions">Submit Action</button>
+            </div>
+        </div>
+
+        <div id="action-loading-indicator" class="loading" style="display: none;">Processing action...</div>
+    </div>
+
+    <div id="neighbor-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Neighbor Details</h3>
+            <div id="modal-body-header" style="margin-bottom: 10px;">
+                <img id="modal-neighbor-flag" src="placeholder_flag.png" alt="Neighbor Flag" style="display: none; width: 45px; height: 30px; vertical-align: middle; margin-right: 8px; border: 1px solid #665c47;">
+                <strong id="modal-neighbor-name" style="font-size: 1.2em;"></strong>
+            </div>
+            <div id="modal-body">
+                <!-- Content will be loaded here -->
+            </div>
+            <div id="modal-neighbor-ethnicities" style="margin-top: 15px;">
+                <h4>Ethnic Groups:</h4>
+                <ul id="modal-neighbor-ethnicities-list">
+                    <li>Ethnic data loading...</li>
+                </ul>
+            </div>
+            <div id="modal-loading" class="loading" style="display: none;">Loading details...</div>
+        </div>
+    </div>
+    
+    <div id="chat-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeChatModal()">&times;</span>
+            <h3 id="chat-modal-title">Communicating with...</h3>
+            <div id="chat-log" class="chat-log-container">
+                <!-- Messages will appear here -->
+            </div>
+            <div class="action-area" style="margin-top: 15px; border-top: 1px solid #444; padding-top: 15px;">
+                <label for="chat-message-input">Your Message:</label>
+                <textarea id="chat-message-input" rows="3" placeholder="Type your message..."></textarea>
+                <button id="send-chat-message-button" class="action-button">Send Message</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-over-screen" style="display: none;">
+        <h1 id="end-screen-title">Game Over</h1>
+        <p id="collapse-reason"></p>
+        <button id="restart-button">Restart Simulation</button>
+    </div>
+
+    <script>
+        document.addEventListener('click', function(e) {
+            window.event = e; // Make event available globally
+        });
+    </script>
+
+    <!-- Intro "video" modal (AI-generated slideshow + narration) -->
+    <div id="intro-video-modal" class="modal" style="display: none;">
+      <div class="modal-content" style="max-width:900px;">
+        <span class="close-button" id="intro-close-button">&times;</span>
+        <div id="intro-slider" style="position:relative; height:360px; background:#111; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          <img id="intro-slide-img" src="placeholder_map.png" alt="Intro slide" style="max-width:100%; max-height:100%; opacity:0; transition: opacity 1s ease;">
+          <div id="intro-caption" style="position:absolute; left:12px; bottom:12px; right:12px; color:#e5dcc8; background:rgba(0,0,0,0.45); padding:10px; border-radius:4px; font-family: 'Cinzel', serif;"></div>
+        </div>
+        <div style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+          <button id="intro-skip" class="slot-button" style="padding:8px 12px;">Skip Intro</button>
+          <div id="intro-progress" style="flex:1; height:12px; background:#333; border-radius:6px; overflow:hidden;">
+            <div id="intro-progress-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#a68c5c,#c9ad7d); transition:width 0.5s linear;"></div>
+          </div>
+        </div>
+        <audio id="intro-narration-audio" style="display:none;"></audio>
+      </div>
+    </div>
+
+    <!-- Action "video" modal (AI-generated slideshow + narration for each player action) -->
+    <div id="action-video-modal" class="modal" style="display: none;">
+      <div class="modal-content" style="max-width:900px;">
+        <span class="close-button" id="action-close-button">&times;</span>
+        <div id="action-slider" style="position:relative; height:360px; background:#090909; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          <img id="action-slide-img" src="placeholder_map.png" alt="Action slide" style="max-width:100%; max-height:100%; opacity:0; transition: opacity 0.8s ease;">
+          <div id="action-caption" style="position:absolute; left:12px; bottom:12px; right:12px; color:#e5dcc8; background:rgba(0,0,0,0.5); padding:10px; border-radius:4px; font-family: 'Cinzel', serif;"></div>
+        </div>
+        <div style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+          <button id="action-skip" class="slot-button" style="padding:8px 12px;">Skip</button>
+          <div id="action-progress" style="flex:1; height:12px; background:#222; border-radius:6px; overflow:hidden;">
+            <div id="action-progress-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#8fc3ff,#6ab04c); transition:width 0.4s linear;"></div>
+          </div>
+        </div>
+        <audio id="action-narration-audio" style="display:none;"></audio>
+      </div>
+    </div>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>
